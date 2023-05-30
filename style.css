@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+  }
+  
+  h1 {
+    margin: 0 0 1rem;
+    text-align: center;
+  }
+  
+  .level {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .label {
+    margin-right: 0.5rem;
+  }
+  
+  .value {
+    font-weight: bold;
+  }
+  
+  .progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .level .value.warning {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .accident-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 9999;
+  }
+  
+
+  .progress {
+    background-color: #4caf50;
+    height: 100%;
+    position: absolute;
+    width: 0;
+  }
+  
