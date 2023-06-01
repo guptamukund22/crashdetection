@@ -92,5 +92,13 @@ body {
   
   .stop-button {
     margin-top: 20px;
+    background-color: black;
+    color:white;
+    border:none;
+    padding:8px 10px 8px 10px;
+    border-radius:4px;
+  }
+  .stop-button:hover{
+    cursor:pointer;
   }
   
