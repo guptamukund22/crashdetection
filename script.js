@@ -5,11 +5,31 @@ const progressBar = document.querySelector('.progress');
 const stopButton = document.querySelector('.stop-button'); // New button element
 
 let isStopped = false; // Flag to indicate if the noise should stop
+let wakeLock = null; // Wake Lock object
 
 stopButton.addEventListener('click', () => {
   isStopped = true;
   audioContext.suspend(); // Pause the audio context
 });
+
+// Request a Wake Lock
+async function requestWakeLock() {
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    console.log('Wake Lock is active');
+  } catch (err) {
+    console.error('Failed to request Wake Lock:', err);
+  }
+}
+
+// Release the Wake Lock
+function releaseWakeLock() {
+  if (wakeLock) {
+    wakeLock.release();
+    wakeLock = null;
+    console.log('Wake Lock is released');
+  }
+}
 
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(stream => {
@@ -76,7 +96,6 @@ navigator.mediaDevices.getUserMedia({ audio: true })
     }
 
     update();
+    requestWakeLock(); // Request Wake Lock
   })
-  .catch(err => {
-    console.error('Error accessing microphone:', err);
-  });
+  .catch
