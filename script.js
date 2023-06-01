@@ -5,30 +5,36 @@ const progressBar = document.querySelector('.progress');
 const stopButton = document.querySelector('.stop-button'); // New button element
 
 let isStopped = false; // Flag to indicate if the noise should stop
-let wakeLock = null; // Wake Lock object
 
 stopButton.addEventListener('click', () => {
   isStopped = true;
   audioContext.suspend(); // Pause the audio context
 });
 
-// Request a Wake Lock
-async function requestWakeLock() {
-  try {
-    wakeLock = await navigator.wakeLock.request('screen');
-    console.log('Wake Lock is active');
-  } catch (err) {
-    console.error('Failed to request Wake Lock:', err);
-  }
-}
+// function(){
+//   emailjs.init("B7bXVdkkwfla5_a67");
+//  }();
 
-// Release the Wake Lock
-function releaseWakeLock() {
-  if (wakeLock) {
-    wakeLock.release();
-    wakeLock = null;
-    console.log('Wake Lock is released');
-  }
+function sendMail() {
+  var params = {
+    name: 'ayush',
+    email: 'iayush.n2@gmail.com',
+    message: '',
+  };
+
+  const serviceID = "service_vke5x7q";
+  const templateID = "template_43wfhak";
+
+    emailjs.send(serviceID, templateID, params)
+    .then(res=>{
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("message").value = "";
+        console.log(res);
+        alert("Your message sent successfully!!")
+
+    })
+    .catch(err=>console.log(err));
 }
 
 navigator.mediaDevices.getUserMedia({ audio: true })
@@ -60,6 +66,7 @@ navigator.mediaDevices.getUserMedia({ audio: true })
         levelElement.textContent = 'ACCIDENT';
         showAccidentPopup();
         playBeep(); // Play a loud sound when the value goes above the threshold
+        sendMail();
       } else {
         levelElement.classList.remove('warning');
       }
@@ -96,6 +103,8 @@ navigator.mediaDevices.getUserMedia({ audio: true })
     }
 
     update();
-    requestWakeLock(); // Request Wake Lock
   })
-  .catch
+  .catch(err => {
+    console.error('Error accessing microphone:', err);
+  });
+
